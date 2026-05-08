@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Manuscripts — Force Discipline Tree</title>
+<style>
+:root {
+  --bg-card: rgba(20, 26, 44, 0.65);
+  --text-primary: #e8eef7;
+  --text-secondary: #9aabc4;
+  --text-tertiary: #5f6c84;
+}
+
+body.mode-jedi {
+  --bg-deep: #0a0e1a;
+  --bg-bottom: #050810;
+  --accent-primary: #5fb0e0;
+  --accent-bright: #b4dcff;
+  --accent-glow: rgba(95, 158, 220, 0.3);
+  --accent-glow-soft: rgba(95, 158, 220, 0.08);
+  --border-default: rgba(95, 158, 220, 0.25);
+  --border-hover: rgba(180, 220, 255, 0.6);
+  --shipped-accent: #ffbf5f;
+  --shipped-bright: #ffd58f;
+  --shipped-border: rgba(255, 191, 95, 0.5);
+  --shipped-glow: rgba(255, 191, 95, 0.2);
+  --shipped-glow-soft: rgba(255, 191, 95, 0.04);
+}
+
+body.mode-sith {
+  --bg-deep: #1a0a0e;
+  --bg-bottom: #100506;
+  --accent-primary: #d04040;
+  --accent-bright: #ffa0a0;
+  --accent-glow: rgba(208, 64, 64, 0.35);
+  --accent-glow-soft: rgba(208, 64, 64, 0.08);
+  --border-default: rgba(208, 64, 64, 0.3);
+  --border-hover: rgba(255, 160, 160, 0.6);
+  --shipped-accent: #ffa040;
+  --shipped-bright: #ffc080;
+  --shipped-border: rgba(255, 160, 64, 0.5);
+  --shipped-glow: rgba(255, 160, 64, 0.2);
+  --shipped-glow-soft: rgba(255, 160, 64, 0.04);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  background:
+    radial-gradient(ellipse at top, var(--accent-glow-soft) 0%, transparent 50%),
+    radial-gradient(ellipse at bottom, var(--shipped-glow-soft) 0%, transparent 50%),
+    linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-bottom) 100%);
+  color: var(--text-primary);
+  min-height: 100vh;
+  padding: 60px 24px;
+  line-height: 1.6;
+  transition: background 0.6s ease;
+}
+
+.container { max-width: 1400px; margin: 0 auto; }
+
+header { text-align: center; margin-bottom: 40px; }
+
+.mask-toggle {
+  display: block;
+  margin: 0 auto 32px;
+  width: 220px;
+  position: relative;
+  filter: drop-shadow(0 0 40px var(--accent-glow));
+  transition: filter 0.6s ease;
+}
+
+.mask-half {
+  width: 220px;
+  height: 330px;
+  background-image: url('archivist_mirror_optimized.jpg');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  transition: opacity 0.5s ease;
+  display: block;
+}
+
+.mask-half.mirror-bottom {
+  transform: scaleY(-1);
+  filter: hue-rotate(140deg) saturate(1.7) brightness(0.95);
+}
+
+.mask-half:hover { opacity: 1 !important; }
+body.mode-jedi .mask-half.sith { opacity: 0.4; }
+body.mode-sith .mask-half.jedi { opacity: 0.4; }
+
+.waterline {
+  position: relative;
+  height: 10px;
+  background: linear-gradient(180deg, transparent 0%, rgba(180, 220, 255, 0.12) 40%, rgba(255, 255, 255, 0.18) 50%, rgba(255, 160, 160, 0.12) 60%, transparent 100%);
+  filter: blur(1px);
+  pointer-events: none;
+  z-index: 2;
+  margin: -5px 0;
+}
+
+.mask-tagline {
+  font-size: 0.7rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-top: 8px;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  text-shadow: 0 0 30px var(--accent-glow);
+}
+
+.subtitle { font-size: 1rem; color: var(--text-secondary); font-style: italic; max-width: 720px; margin: 0 auto; letter-spacing: 0.05em; }
+.attribution { font-size: 0.85rem; color: var(--text-tertiary); margin-top: 24px; letter-spacing: 0.1em; text-transform: uppercase; }
+.divider { width: 60%; margin: 40px auto; height: 1px; background: linear-gradient(90deg, transparent, var(--border-default), transparent); }
+.legend { display: flex; justify-content: center; gap: 32px; margin-bottom: 40px; font-size: 0.8rem; color: var(--text-tertiary); letter-spacing: 0.1em; text-transform: uppercase; flex-wrap: wrap; }
+.legend-item { display: flex; align-items: center; gap: 8px; }
+.legend-dot { width: 10px; height: 10px; border-radius: 50%; border: 1px solid; }
+.legend-shipped { border-color: var(--shipped-accent); background: var(--shipped-glow); }
+.legend-planned { border-color: var(--text-tertiary); background: transparent; }
+
+.pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 40px; margin-bottom: 60px; }
+
+.pillar {
+  background: linear-gradient(180deg, rgba(20, 26, 44, 0.4) 0%, rgba(10, 14, 26, 0.2) 100%);
+  border: 1px solid var(--border-default);
+  border-radius: 4px;
+  padding: 32px 24px;
+  position: relative;
+  transition: border-color 0.4s ease;
+}
+
+.pillar::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 60%; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+}
+
+.pillar-header { text-align: center; margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--border-default); }
+.pillar-name { font-size: 1.4rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--shipped-accent); margin-bottom: 12px; }
+.pillar-tagline { font-size: 0.85rem; color: var(--text-tertiary); font-style: italic; }
+
+.discipline {
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: 4px;
+  padding: 20px 18px;
+  margin-bottom: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.discipline:hover { border-color: var(--border-hover); transform: translateY(-2px); box-shadow: 0 4px 20px var(--accent-glow); }
+.discipline.shipped { border-color: var(--shipped-border); }
+.discipline.shipped:hover { border-color: var(--shipped-bright); box-shadow: 0 4px 20px var(--shipped-glow); }
+
+.discipline-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.discipline-name { font-size: 1.1rem; letter-spacing: 0.1em; font-variant: small-caps; }
+
+.discipline-status { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 4px 10px; border-radius: 2px; border: 1px solid; white-space: nowrap; }
+.status-shipped { color: var(--shipped-bright); border-color: var(--shipped-accent); background: var(--shipped-glow-soft); }
+.status-planned { color: var(--text-tertiary); border-color: var(--text-tertiary); }
+
+.discipline-tagline { font-size: 0.85rem; color: var(--text-secondary); font-style: italic; margin-top: 8px; }
+.discipline-detail { display: none; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border-default); }
+.discipline.expanded .discipline-detail { display: block; animation: expand 0.4s ease; }
+@keyframes expand { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+.tier { margin-bottom: 16px; padding: 12px 16px; background: rgba(10, 14, 26, 0.5); border-left: 2px solid var(--accent-primary); border-radius: 2px; }
+.tier:last-child { margin-bottom: 0; }
+.tier-label { font-size: 0.85rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--shipped-accent); margin-bottom: 4px; }
+.tier-name { font-size: 1rem; font-variant: small-caps; margin-bottom: 6px; }
+.tier-desc { font-size: 0.85rem; color: var(--text-secondary); }
+
+.singular-expression { padding: 12px 16px; background: rgba(10, 14, 26, 0.5); border-left: 2px solid var(--accent-primary); border-radius: 2px; }
+.singular-label { font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 8px; font-style: italic; }
+.singular-desc { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; }
+.scale-note { margin-top: 12px; padding-top: 10px; border-top: 1px solid rgba(95, 158, 220, 0.15); font-size: 0.8rem; color: var(--text-tertiary); font-style: italic; }
+.discipline-source { margin-top: 16px; font-size: 0.75rem; color: var(--text-tertiary); font-style: italic; }
+
+.manuscript-link { display: inline-block; margin-top: 14px; padding: 8px 18px; background: linear-gradient(180deg, var(--shipped-glow) 0%, var(--shipped-glow-soft) 100%); color: var(--shipped-bright); text-decoration: none; font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; border: 1px solid var(--shipped-accent); border-radius: 2px; transition: all 0.3s ease; }
+.manuscript-link:hover { background: var(--shipped-glow); color: white; box-shadow: 0 0 15px var(--shipped-glow); }
+
+footer { text-align: center; margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--border-default); color: var(--text-tertiary); font-size: 0.85rem; font-style: italic; }
+footer a { color: var(--accent-primary); text-decoration: none; }
+footer a:hover { color: var(--accent-bright); }
+
+@media (max-width: 768px) {
+  body { padding: 40px 16px; }
+  .pillars { gap: 24px; }
+  .pillar { padding: 24px 16px; }
+  .mask-toggle { width: 160px; }
+  .mask-half { width: 160px; height: 240px; }
+}
+</style>
+</head>
+<body class="mode-jedi">
+<div class="container">
+  <header>
+    <div class="mask-toggle" aria-label="Light / Dark Archivist toggle">
+      <div class="mask-half jedi mirror-top" data-mode="jedi" role="button" aria-label="Jedi mode (Light)"></div>
+      <div class="waterline" aria-hidden="true"></div>
+      <div class="mask-half sith mirror-bottom" data-mode="sith" role="button" aria-label="Sith mode (Dark)"></div>
+    </div>
+    <div class="mask-tagline" id="mode-tagline">Light · Dark</div>
+    <h1>The Manuscripts</h1>
+    <p class="subtitle" id="mode-subtitle">Force disciplines, examined as objects of study. Each discipline files under one of the three foundational families — Control, Sense, Alter.</p>
+    <p class="attribution" id="mode-attribution">Source: <em>The Jedi Path</em> (Wallace, 2010) · KOTOR I &amp; II canon · all-Star-Wars where the discipline reaches</p>
+  </header>
+  <div class="divider"></div>
+  <div class="legend">
+    <div class="legend-item"><span class="legend-dot legend-shipped"></span><span>Manuscript Available</span></div>
+    <div class="legend-item"><span class="legend-dot legend-planned"></span><span>Planned</span></div>
+  </div>
+  <div class="pillars" id="pillars"></div>
+  <footer>
+    <p id="mode-footer">The Archivist examines what the Jedi taught and the Sith refined — outside time, outside the orders.</p>
+    <p style="margin-top: 12px;"><a href="https://www.youtube.com/@PsyOp-Archivist" target="_blank" rel="noopener">@PsyOp-Archivist</a></p>
+  </footer>
+</div>
+
+<script>
+const jediData = {
+  control: {
+    name: "Control",
+    tagline: "The Force focused inward",
+    disciplines: [
+      { name: "Tutaminis", tagline: "The absorbing field", shipped: true, manuscriptUrl: "#", manuscriptLabel: "Manuscript I", tiers: [{ name: "Force Aura", desc: "The practitioner shapes a field that absorbs the elements — sonic, fire, cold, electrical. Selective at this tier; kinetic strikes pass through unabsorbed." }, { name: "Force Shield", desc: "The field has densified. Coherent kinetic force meets resistance. A lightsaber strikes, and is shed. The body beneath is not marked." }, { name: "Force Armor", desc: "The field collapses into the body. The Master does not project the field — the Master is the field. The catch is bare-handed." }], source: "KOTOR I &amp; II · Halcyon line · Satele Shan at Alderaan" },
+      { name: "Curato Salva", tagline: "The healing flow", shipped: false, tiers: [{ name: "Self-Healing", desc: "The practitioner accelerates their own body's recovery through Force-channeled focus." }, { name: "Healing Touch", desc: "The flow extends to others — wounds knit, fevers break, life-force is restored." }, { name: "Crisis Healing", desc: "At master tier, the practitioner can pull a body back from the threshold — at considerable cost." }], source: "The Jedi Path · Old Republic Jedi healers · Rey on Kef Bir (current canon)" },
+      { name: "Altus Sopor", tagline: "Deep stillness", shipped: false, tiers: [{ name: "Trance", desc: "The practitioner slows their metabolism into a Force-sustained meditative state." }, { name: "Hibernation", desc: "Survival in conditions that would kill an ordinary body — vacuum, cold, prolonged starvation." }, { name: "Concealment", desc: "The deepest trance hides the practitioner's Force signature entirely from those who would seek them." }], source: "The Jedi Path · Survival training · Yoda on Dagobah" },
+      { name: "Breath Control", tagline: "The body as discipline", shipped: false, tiers: [{ name: "Control of Pain", desc: "The practitioner channels physical pain through the Force, separating sensation from suffering." }, { name: "Control of Body", desc: "Hunger, thirst, exhaustion — held at bay through sustained Force focus." }, { name: "Control of Vital Function", desc: "Heart rate, blood flow, respiration — modulated at will." }], source: "The Jedi Path · Foundational Jedi training across all eras" }
+    ]
+  },
+  sense: {
+    name: "Sense",
+    tagline: "The Force expanding outward",
+    disciplines: [
+      { name: "Battle Meditation", tagline: "The unified will", shipped: false, manuscriptLabel: "Manuscript II (in production)", singular: { desc: "The practitioner enters deep trance and projects coordinated will across allies — sharpening focus, sustaining confidence, holding off despair. Range and number of beings affected scale with mastery, from a single ally nearby to fleet-scale engagements that shift the tide of entire battles.", scale: "From two minds → a unit → an army" }, source: "Bastila Shan · Nomi Sunrider · KOTOR + Tales of the Jedi" },
+      { name: "Psychometry", tagline: "The reading of objects", shipped: false, singular: { desc: "The practitioner reads emotional residue and historical echoes from a touched object. Surface impressions come easily; deeper readings of an object's older history demand greater immersion. The deepest readings let the practitioner experience past events as if present — at the cost of bearing what the object remembers.", scale: "From recent emotional residue → witnessing the past as if present" }, source: "Quinlan Vos · Cal Kestis (Jedi: Fallen Order, current canon)" },
+      { name: "Prima Vitae", tagline: "The life sense", shipped: false, singular: { desc: "The practitioner perceives the living presence around them — friend, foe, beast, plant. With mastery, emotional state, intent, and deception become as readable as words. Master practitioners sense life across planetary distances.", scale: "From nearby presences → emotional state and intent → planetary-scale awareness" }, source: "The Jedi Path · Sense pillar · Obi-Wan on the Death Star" },
+      { name: "Projected Telepathy", tagline: "The mind reaching across", shipped: false, singular: { desc: "The practitioner projects thought and receives the same. At low mastery, surface thoughts of those nearby. With practice, mind-to-mind communication across familiar distance. At master, sustained Force-bonds across any distance — the Force itself the channel.", scale: "From local surface thoughts → mind-to-mind communication → Force-bond across any distance" }, source: "The Jedi Path · Force-bonds (Bastila/Revan, Master/Apprentice pairs, Rey/Kylo dyad)" }
+    ]
+  },
+  alter: {
+    name: "Alter",
+    tagline: "The Force shaping the world",
+    disciplines: [
+      { name: "Telekinesis", tagline: "The hand that does not touch", shipped: false, tiers: [{ name: "Move", desc: "The practitioner pushes, pulls, or lifts objects through Force channeled outward." }, { name: "Throw", desc: "Force-thrown weapons, debris weaponized, lightsaber recall." }, { name: "Lift the Massive", desc: "At master tier, the practitioner moves objects of considerable mass — sometimes far beyond what physical strength allows." }], source: "Foundational Force discipline · Yoda's X-Wing on Dagobah · Galen Marek lifts a Star Destroyer" },
+      { name: "Affect Mind", tagline: "The persuasion frequency", shipped: false, tiers: [{ name: "Suggestion", desc: "The weak-willed take a small redirection — 'these are not the droids you seek.'" }, { name: "Persuasion", desc: "Stronger minds bend; the practitioner shapes belief, behavior, recall." }, { name: "Compulsion", desc: "At master tier, the line between persuasion and domination becomes one of intent — not capability." }], source: "Jedi mind trick · Obi-Wan Kenobi · Old Republic Jedi" },
+      { name: "Alter Environment", tagline: "The world bent to will", shipped: false, singular: { desc: "The practitioner shifts the environment around them through Force focus. At low mastery, small changes — air, flame, water nearby. With practice, atmospheric conditions over a region. Master expressions reshape the environment at scale, at the cost of precise control.", scale: "From local conditions → regional weather → environmental upheaval" }, source: "The Jedi Path · refined to extremes by Sith counterparts" }
+    ]
+  }
+};
+
+const sithData = {
+  control: {
+    name: "Control",
+    tagline: "The Force focused inward — corrupted",
+    disciplines: [
+      { name: "Force Drain", tagline: "Life essence transferred", shipped: false, singular: { desc: "The practitioner pulls life-force from a victim into themselves — the inverse of Curato Salva. The victim weakens; the practitioner strengthens. With mastery, the drain reaches across distance and against multiple targets simultaneously.", scale: "From single touch → ranged drain → mass life-stripping" }, source: "Sith Lords across all eras · Darth Nihilus's hunger as ultimate expression" },
+      { name: "Force Rage", tagline: "The dark surrender", shipped: false, singular: { desc: "The practitioner channels anger, hatred, and pain into amplified physical strength, speed, and Force capacity. Sustained at cost — the body breaks down under prolonged Rage. The practitioner trades long-term wellness for short-term dominance.", scale: "From single combat surge → battle-long sustained fury → permanent state of berserk power" }, source: "Sith warrior tradition · Darth Vader · KOTOR Dark Marauder" },
+      { name: "Dun Möch", tagline: "The taunt that breaks", shipped: false, singular: { desc: "Psychological warfare through targeted mockery — the practitioner identifies their opponent's deepest doubt and presses on it during combat, breaking concentration and inducing emotional opening that exposes them to the dark side.", scale: "From combat taunt → sustained psychological campaign → conversion through despair" }, source: "Book of Sith · Sith dueling tradition" }
+    ]
+  },
+  sense: {
+    name: "Sense",
+    tagline: "The Force expanding outward — corrupted",
+    disciplines: [
+      { name: "Mind Probe", tagline: "The thought taken", shipped: false, tiers: [{ name: "Surface Read", desc: "The practitioner extracts surface thoughts from a captive subject without consent — the inverse of consensual telepathy." }, { name: "Deep Probe", desc: "Buried memories and suppressed knowledge are pulled to the surface, often leaving the subject neurologically damaged." }, { name: "Total Extraction", desc: "Master practitioners strip every memory from a subject, leaving an empty shell behind. The technique is illegal in every order that has ever known of it." }], source: "Sith interrogation tradition · Darth Vader on Bespin · Kylo Ren on Starkiller Base" },
+      { name: "Sith Battle Coordination", tagline: "The despair conducted", shipped: false, singular: { desc: "The same architecture as Battle Meditation, applied with inverted intent — instead of unifying allies, the Sith practitioner *breaks enemy will*, projecting despair, confusion, and dread across opposing forces. Lord Hoth used it. Bastila Shan, briefly converted, demonstrated its battlefield reversibility.", scale: "From single-unit demoralization → army-scale despair → fleet-scale collapse" }, source: "Lord Hoth · Bastila Shan post-conversion · Darth Caedus (Jacen Solo)" },
+      { name: "Aura of Uneasiness", tagline: "Fear projected outward", shipped: false, singular: { desc: "The practitioner radiates a Force-projected aura of dread, unease, or revulsion that affects all sentients within range. The weak-willed flee; the strong-willed feel deeply uncomfortable. The aura sustains as long as the practitioner concentrates.", scale: "From immediate vicinity → entire chambers → city-scale dread campaigns" }, source: "Sith Lord intimidation · Sith fortress wards" }
+    ]
+  },
+  alter: {
+    name: "Alter",
+    tagline: "The Force shaping the world — corrupted",
+    disciplines: [
+      { name: "Force Lightning", tagline: "Bioelectric annihilation", shipped: false, tiers: [{ name: "Force Sparks", desc: "Bright crackling current arcs from the practitioner's hands — painful, momentarily disabling, but recoverable." }, { name: "Force Lightning", desc: "Sustained branching current capable of incapacitating or killing through prolonged exposure. The signature Sith weapon." }, { name: "Force Crucitorn", desc: "At master tier, the lightning is shaped through Force focus to inflict only pain without lethal damage — torment as discipline. Or alternately, lethality at fleet-scale." }], source: "Darth Sidious · Darth Bane · Sith tradition since the Hundred-Year Darkness" },
+      { name: "Force Choke", tagline: "Telekinesis weaponized", shipped: false, singular: { desc: "The practitioner applies telekinesis to a living target's throat, restricting blood flow and respiration. With mastery, the choke can be applied at distance, through walls, or to multiple targets simultaneously — and held with sufficient precision to torture without immediate death.", scale: "From single point-blank touch → ranged hold → multi-target sustained pressure" }, source: "Darth Vader · Sith dueling tradition" },
+      { name: "Force Storm", tagline: "The weather of the Sith", shipped: false, singular: { desc: "Master-tier expression — the practitioner conjures a localized atmospheric or extra-dimensional storm of pure dark-side energy. Force tornadoes, lightning storms, and reality-distorting voids fall under this discipline. Few practitioners survive their own first attempt.", scale: "Master-tier only — the discipline has no Initiate or Adept stage by canon" }, source: "Darth Sidious · Dark Lord of the Sith ritual peak expressions" }
+    ]
+  }
+};
+
+const root = document.getElementById('pillars');
+const tagline = document.getElementById('mode-tagline');
+const subtitle = document.getElementById('mode-subtitle');
+const attribution = document.getElementById('mode-attribution');
+const footer = document.getElementById('mode-footer');
+
+function render(mode) {
+  document.body.className = 'mode-' + mode;
+  if (mode === 'jedi') {
+    tagline.textContent = 'Light · The Jedi Way';
+    subtitle.innerHTML = 'Force disciplines, examined as objects of study. Each discipline files under one of the three foundational families — Control, Sense, Alter.';
+    attribution.innerHTML = 'Source: <em>The Jedi Path</em> (Wallace, 2010) · KOTOR I &amp; II canon · all-Star-Wars where the discipline reaches';
+    footer.innerHTML = 'The Archivist examines what the Jedi taught and the Sith refined — outside time, outside the orders.';
+  } else {
+    tagline.textContent = 'Dark · The Sith Refinement';
+    subtitle.innerHTML = 'Sith disciplines — the corrupted vectors of the same fundamental Force families. The Archivist files them with the same scholarly distance.';
+    attribution.innerHTML = 'Source: <em>Book of Sith</em> (Wallace, 2012) · Old Republic and pre-Republic Sith canon · all-Star-Wars where the corruption reaches';
+    footer.innerHTML = 'The Archivist files the Sith refinements with the same hand that filed the Jedi teachings.';
+  }
+  const data = mode === 'jedi' ? jediData : sithData;
+  root.innerHTML = '';
+  Object.keys(data).forEach(key => {
+    const pillar = data[key];
+    const pillarEl = document.createElement('div');
+    pillarEl.className = 'pillar';
+    pillarEl.innerHTML = `<div class="pillar-header"><div class="pillar-name">${pillar.name}</div><div class="pillar-tagline">${pillar.tagline}</div></div><div class="disciplines"></div>`;
+    const discRoot = pillarEl.querySelector('.disciplines');
+    pillar.disciplines.forEach(d => {
+      const dEl = document.createElement('div');
+      dEl.className = 'discipline' + (d.shipped ? ' shipped' : '');
+      const statusClass = d.shipped ? 'status-shipped' : 'status-planned';
+      const statusText = d.shipped ? 'Available' : 'Planned';
+      let detailContent = '';
+      if (d.tiers) {
+        d.tiers.forEach((t, i) => {
+          const roman = ['I', 'II', 'III'][i];
+          const tierLabel = ['Initiate', 'Adept', 'Master'][i];
+          detailContent += `<div class="tier"><div class="tier-label">${roman} — ${tierLabel}</div><div class="tier-name">${t.name}</div><div class="tier-desc">${t.desc}</div></div>`;
+        });
+      } else if (d.singular) {
+        detailContent = `<div class="singular-expression"><div class="singular-label">Singular Technique — Scales with Mastery</div><div class="singular-desc">${d.singular.desc}</div>${d.singular.scale ? `<div class="scale-note">${d.singular.scale}</div>` : ''}</div>`;
+      }
+      let linkHtml = '';
+      if (d.shipped && d.manuscriptUrl) {
+        linkHtml = `<a href="${d.manuscriptUrl}" class="manuscript-link" target="_blank" rel="noopener">Read ${d.manuscriptLabel}</a>`;
+      }
+      dEl.innerHTML = `<div class="discipline-header"><div><div class="discipline-name">${d.name}</div><div class="discipline-tagline">${d.tagline}</div></div><span class="discipline-status ${statusClass}">${statusText}</span></div><div class="discipline-detail">${detailContent}<div class="discipline-source">${d.source}</div>${linkHtml}</div>`;
+      dEl.addEventListener('click', () => dEl.classList.toggle('expanded'));
+      discRoot.appendChild(dEl);
+    });
+    root.appendChild(pillarEl);
+  });
+}
+
+document.querySelectorAll('.mask-half').forEach(half => {
+  half.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const mode = half.dataset.mode;
+    localStorage.setItem('manuscripts-mode', mode);
+    render(mode);
+  });
+});
+
+const savedMode = localStorage.getItem('manuscripts-mode') || 'jedi';
+render(savedMode);
+</script>
+</body>
+</html>
