@@ -216,7 +216,7 @@ footer a:hover { color: var(--accent-bright); }
     </div>
     <div class="mask-tagline" id="mode-tagline">Light · Dark</div>
     <h1>The Manuscripts</h1>
-    <p class="subtitle" id="mode-subtitle">Force disciplines, examined as objects of study. Each discipline files under one of the three foundational families — Control, Sense, Alter.</p>
+    <p class="subtitle" id="mode-subtitle">Force disciplines, examined as objects of study. Each discipline files under one of three Force branches — Control, Sense, Alter — the disciplines of the first Jedi pillar.</p>
     <p class="attribution" id="mode-attribution">Source: <em>The Jedi Path</em> (Wallace, 2010) · KOTOR I &amp; II canon · all-Star-Wars where the discipline reaches</p>
   </header>
   <div class="divider"></div>
@@ -304,7 +304,7 @@ function render(mode) {
   document.body.className = 'mode-' + mode;
   if (mode === 'jedi') {
     tagline.textContent = 'Light · The Jedi Way';
-    subtitle.innerHTML = 'Force disciplines, examined as objects of study. Each discipline files under one of the three foundational families — Control, Sense, Alter.';
+    subtitle.innerHTML = 'Force disciplines, examined as objects of study. Each discipline files under one of three Force branches — Control, Sense, Alter — the disciplines of the first Jedi pillar.';
     attribution.innerHTML = 'Source: <em>The Jedi Path</em> (Wallace, 2010) · KOTOR I &amp; II canon · all-Star-Wars where the discipline reaches';
     footer.innerHTML = 'The Archivist examines what the Jedi taught and the Sith refined — outside time, outside the orders.';
   } else {
