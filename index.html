@@ -60,138 +60,116 @@ body {
 }
 
 .container { max-width: 1400px; margin: 0 auto; }
-
 header { text-align: center; margin-bottom: 40px; }
 
 .mask-toggle {
-  display: block;
-  margin: 0 auto 32px;
-  width: 220px;
-  position: relative;
-  filter: drop-shadow(0 0 40px var(--accent-glow));
-  transition: filter 0.6s ease;
+  display: block; margin: 0 auto 32px; width: 220px;
+  position: relative; filter: drop-shadow(0 0 40px var(--accent-glow)); transition: filter 0.6s ease;
 }
-
 .mask-half {
-  width: 220px;
-  height: 330px;
+  width: 220px; height: 330px;
   background-image: url('archivist_mirror_optimized.jpg');
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  cursor: pointer;
-  transition: opacity 0.5s ease;
-  display: block;
+  background-size: 100% 100%; background-repeat: no-repeat; background-position: center;
+  cursor: pointer; transition: opacity 0.5s ease; display: block;
 }
-
-.mask-half.mirror-bottom {
-  transform: scaleY(-1);
-  filter: hue-rotate(140deg) saturate(1.7) brightness(0.95);
-}
-
+.mask-half.mirror-bottom { transform: scaleY(-1); filter: hue-rotate(140deg) saturate(1.7) brightness(0.95); }
 .mask-half:hover { opacity: 1 !important; }
 body.mode-jedi .mask-half.sith { opacity: 0.4; }
 body.mode-sith .mask-half.jedi { opacity: 0.4; }
 
 .waterline {
-  position: relative;
-  height: 10px;
-  background: linear-gradient(180deg, transparent 0%, rgba(180, 220, 255, 0.12) 40%, rgba(255, 255, 255, 0.18) 50%, rgba(255, 160, 160, 0.12) 60%, transparent 100%);
-  filter: blur(1px);
-  pointer-events: none;
-  z-index: 2;
-  margin: -5px 0;
+  position: relative; height: 10px;
+  background: linear-gradient(180deg, transparent 0%, rgba(180,220,255,0.12) 40%, rgba(255,255,255,0.18) 50%, rgba(255,160,160,0.12) 60%, transparent 100%);
+  filter: blur(1px); pointer-events: none; z-index: 2; margin: -5px 0;
 }
+.mask-tagline { font-size: 0.7rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--text-tertiary); margin-top: 8px; }
 
-.mask-tagline {
-  font-size: 0.7rem;
-  letter-spacing: 0.4em;
-  text-transform: uppercase;
-  color: var(--text-tertiary);
-  margin-top: 8px;
-}
-
-h1 {
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  font-weight: 400;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  margin-bottom: 16px;
-  text-shadow: 0 0 30px var(--accent-glow);
-}
-
+h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 16px; text-shadow: 0 0 30px var(--accent-glow); }
 .subtitle { font-size: 1rem; color: var(--text-secondary); font-style: italic; max-width: 720px; margin: 0 auto; letter-spacing: 0.05em; }
 .attribution { font-size: 0.85rem; color: var(--text-tertiary); margin-top: 24px; letter-spacing: 0.1em; text-transform: uppercase; }
-.divider { width: 60%; margin: 40px auto; height: 1px; background: linear-gradient(90deg, transparent, var(--border-default), transparent); }
+.divider { width: 60%; margin: 48px auto; height: 1px; background: linear-gradient(90deg, transparent, var(--border-default), transparent); }
+
 .legend { display: flex; justify-content: center; gap: 32px; margin-bottom: 40px; font-size: 0.8rem; color: var(--text-tertiary); letter-spacing: 0.1em; text-transform: uppercase; flex-wrap: wrap; }
 .legend-item { display: flex; align-items: center; gap: 8px; }
 .legend-dot { width: 10px; height: 10px; border-radius: 50%; border: 1px solid; }
 .legend-shipped { border-color: var(--shipped-accent); background: var(--shipped-glow); }
 .legend-planned { border-color: var(--text-tertiary); background: transparent; }
+.legend-inprod { border-color: var(--accent-primary); background: var(--accent-glow-soft); }
 
-.pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 40px; margin-bottom: 60px; }
+/* === FRAMEWORK HEADER (pillar wrapper / taxonomy note) === */
+.framework-header {
+  text-align: center; margin-bottom: 32px; padding: 20px 28px;
+  border: 1px solid var(--border-default); border-radius: 4px;
+  background: rgba(10, 14, 26, 0.45); position: relative;
+}
+.framework-header::before {
+  content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 40%; height: 1px; background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+}
+.fw-label { font-size: 0.68rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 7px; }
+.fw-name { font-size: 1.1rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent-primary); margin-bottom: 8px; }
+.fw-desc { font-size: 0.82rem; color: var(--text-tertiary); font-style: italic; max-width: 640px; margin: 0 auto; line-height: 1.75; }
+
+/* === COLUMNS === */
+.pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 40px; margin-bottom: 0; }
 
 .pillar {
-  background: linear-gradient(180deg, rgba(20, 26, 44, 0.4) 0%, rgba(10, 14, 26, 0.2) 100%);
-  border: 1px solid var(--border-default);
-  border-radius: 4px;
-  padding: 32px 24px;
-  position: relative;
-  transition: border-color 0.4s ease;
+  background: linear-gradient(180deg, rgba(20,26,44,0.4) 0%, rgba(10,14,26,0.2) 100%);
+  border: 1px solid var(--border-default); border-radius: 4px; padding: 32px 24px; position: relative;
 }
-
 .pillar::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 50%;
-  transform: translateX(-50%);
-  width: 60%; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+  content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 60%; height: 1px; background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
 }
-
 .pillar-header { text-align: center; margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--border-default); }
-.pillar-name { font-size: 1.4rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--shipped-accent); margin-bottom: 12px; }
+.pillar-name { font-size: 1.4rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--shipped-accent); margin-bottom: 6px; }
+.pillar-rank { font-size: 0.68rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 8px; }
 .pillar-tagline { font-size: 0.85rem; color: var(--text-tertiary); font-style: italic; }
+.pillar-crossref { font-size: 0.72rem; color: var(--text-tertiary); font-style: italic; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border-default); }
 
+/* === DISCIPLINE CARDS === */
 .discipline {
-  background: var(--bg-card);
-  border: 1px solid var(--border-default);
-  border-radius: 4px;
-  padding: 20px 18px;
-  margin-bottom: 16px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  background: var(--bg-card); border: 1px solid var(--border-default); border-radius: 4px;
+  padding: 20px 18px; margin-bottom: 16px; cursor: pointer; transition: all 0.3s ease;
 }
+.discipline:last-child { margin-bottom: 0; }
 .discipline:hover { border-color: var(--border-hover); transform: translateY(-2px); box-shadow: 0 4px 20px var(--accent-glow); }
 .discipline.shipped { border-color: var(--shipped-border); }
 .discipline.shipped:hover { border-color: var(--shipped-bright); box-shadow: 0 4px 20px var(--shipped-glow); }
+.discipline.inprod { border-color: var(--accent-primary); }
+.discipline.inprod:hover { border-color: var(--accent-bright); box-shadow: 0 4px 20px var(--accent-glow); }
 
 .discipline-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
 .discipline-name { font-size: 1.1rem; letter-spacing: 0.1em; font-variant: small-caps; }
-
 .discipline-status { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 4px 10px; border-radius: 2px; border: 1px solid; white-space: nowrap; }
 .status-shipped { color: var(--shipped-bright); border-color: var(--shipped-accent); background: var(--shipped-glow-soft); }
 .status-planned { color: var(--text-tertiary); border-color: var(--text-tertiary); }
+.status-inprod { color: var(--accent-bright); border-color: var(--accent-primary); background: var(--accent-glow-soft); }
 
 .discipline-tagline { font-size: 0.85rem; color: var(--text-secondary); font-style: italic; margin-top: 8px; }
 .discipline-detail { display: none; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border-default); }
 .discipline.expanded .discipline-detail { display: block; animation: expand 0.4s ease; }
-@keyframes expand { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes expand { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
 
-.tier { margin-bottom: 16px; padding: 12px 16px; background: rgba(10, 14, 26, 0.5); border-left: 2px solid var(--accent-primary); border-radius: 2px; }
+.tier { margin-bottom: 14px; padding: 12px 16px; background: rgba(10,14,26,0.5); border-left: 2px solid var(--accent-primary); border-radius: 2px; }
 .tier:last-child { margin-bottom: 0; }
-.tier-label { font-size: 0.85rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--shipped-accent); margin-bottom: 4px; }
-.tier-name { font-size: 1rem; font-variant: small-caps; margin-bottom: 6px; }
-.tier-desc { font-size: 0.85rem; color: var(--text-secondary); }
+.tier-label { font-size: 0.82rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--shipped-accent); margin-bottom: 3px; }
+.tier-name { font-size: 1rem; font-variant: small-caps; margin-bottom: 5px; }
+.tier-desc { font-size: 0.84rem; color: var(--text-secondary); }
 
-.singular-expression { padding: 12px 16px; background: rgba(10, 14, 26, 0.5); border-left: 2px solid var(--accent-primary); border-radius: 2px; }
+.singular-expression { padding: 12px 16px; background: rgba(10,14,26,0.5); border-left: 2px solid var(--accent-primary); border-radius: 2px; }
 .singular-label { font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 8px; font-style: italic; }
-.singular-desc { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; }
-.scale-note { margin-top: 12px; padding-top: 10px; border-top: 1px solid rgba(95, 158, 220, 0.15); font-size: 0.8rem; color: var(--text-tertiary); font-style: italic; }
-.discipline-source { margin-top: 16px; font-size: 0.75rem; color: var(--text-tertiary); font-style: italic; }
+.singular-desc { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.75; }
+.scale-note { margin-top: 12px; padding-top: 10px; border-top: 1px solid rgba(95,158,220,0.12); font-size: 0.78rem; color: var(--text-tertiary); font-style: italic; }
+.discipline-source { margin-top: 14px; font-size: 0.74rem; color: var(--text-tertiary); font-style: italic; }
 
 .manuscript-link { display: inline-block; margin-top: 14px; padding: 8px 18px; background: linear-gradient(180deg, var(--shipped-glow) 0%, var(--shipped-glow-soft) 100%); color: var(--shipped-bright); text-decoration: none; font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; border: 1px solid var(--shipped-accent); border-radius: 2px; transition: all 0.3s ease; }
 .manuscript-link:hover { background: var(--shipped-glow); color: white; box-shadow: 0 0 15px var(--shipped-glow); }
+.inprod-label { display: inline-block; margin-top: 10px; font-size: 0.78rem; color: var(--accent-primary); letter-spacing: 0.1em; font-style: italic; }
+
+/* === ADVANCED SECTION === */
+.advanced-section { margin-top: 0; }
+.advanced-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 40px; }
 
 footer { text-align: center; margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--border-default); color: var(--text-tertiary); font-size: 0.85rem; font-style: italic; }
 footer a { color: var(--accent-primary); text-decoration: none; }
@@ -216,149 +194,440 @@ footer a:hover { color: var(--accent-bright); }
     </div>
     <div class="mask-tagline" id="mode-tagline">Light · Dark</div>
     <h1>The Manuscripts</h1>
-    <p class="subtitle" id="mode-subtitle">Force disciplines, examined as objects of study. Each discipline files under one of three Force branches — Control, Sense, Alter — the disciplines of the first Jedi pillar.</p>
-    <p class="attribution" id="mode-attribution">Source: <em>The Jedi Path</em> (Wallace, 2010) · KOTOR I &amp; II canon · all-Star-Wars where the discipline reaches</p>
+    <p class="subtitle" id="mode-subtitle">Force abilities, catalogued as objects of study. The Archivist files them without allegiance — what the Jedi named and codified; what the Sith renamed and refined.</p>
+    <p class="attribution" id="mode-attribution">Source: <em>The Jedi Path</em> (Wallace, 2010) · <em>Book of Sith</em> (Wallace, 2012) · KOTOR I &amp; II · all-Star-Wars where the discipline reaches</p>
   </header>
   <div class="divider"></div>
   <div class="legend">
     <div class="legend-item"><span class="legend-dot legend-shipped"></span><span>Manuscript Available</span></div>
+    <div class="legend-item"><span class="legend-dot legend-inprod"></span><span>In Production</span></div>
     <div class="legend-item"><span class="legend-dot legend-planned"></span><span>Planned</span></div>
   </div>
-  <div class="pillars" id="pillars"></div>
+  <div id="root"></div>
   <footer>
     <p id="mode-footer">The Archivist examines what the Jedi taught and the Sith refined — outside time, outside the orders.</p>
-    <p style="margin-top: 12px;"><a href="https://www.youtube.com/@PsyOp-Archivist" target="_blank" rel="noopener">@PsyOp-Archivist</a></p>
+    <p style="margin-top:12px;"><a href="https://www.youtube.com/@PsyOp-Archivist" target="_blank" rel="noopener">@PsyOp-Archivist</a></p>
   </footer>
 </div>
 
 <script>
+// ─── JEDI DATA ────────────────────────────────────────────────────────────────
 const jediData = {
-  control: {
-    name: "Control",
-    tagline: "The Force focused inward",
-    disciplines: [
-      { name: "Tutaminis", tagline: "The absorbing field", shipped: true, manuscriptUrl: "https://youtu.be/R6TZ1rwnhbc", manuscriptLabel: "Manuscript I", tiers: [{ name: "Force Aura", desc: "The practitioner shapes a field that absorbs the elements — sonic, fire, cold, electrical. Selective at this tier; kinetic strikes pass through unabsorbed." }, { name: "Force Shield", desc: "The field has densified. Coherent kinetic force meets resistance. A lightsaber strikes, and is shed. The body beneath is not marked." }, { name: "Force Armor", desc: "The field collapses into the body. The Master does not project the field — the Master is the field. The catch is bare-handed." }], source: "KOTOR I &amp; II · Halcyon line · Satele Shan at Alderaan" },
-      { name: "Curato Salva", tagline: "The healing flow", shipped: false, tiers: [{ name: "Self-Healing", desc: "The practitioner accelerates their own body's recovery through Force-channeled focus." }, { name: "Healing Touch", desc: "The flow extends to others — wounds knit, fevers break, life-force is restored." }, { name: "Crisis Healing", desc: "At master tier, the practitioner can pull a body back from the threshold — at considerable cost." }], source: "The Jedi Path · Old Republic Jedi healers · Rey on Kef Bir (current canon)" },
-      { name: "Altus Sopor", tagline: "Deep stillness", shipped: false, tiers: [{ name: "Trance", desc: "The practitioner slows their metabolism into a Force-sustained meditative state." }, { name: "Hibernation", desc: "Survival in conditions that would kill an ordinary body — vacuum, cold, prolonged starvation." }, { name: "Concealment", desc: "The deepest trance hides the practitioner's Force signature entirely from those who would seek them." }], source: "The Jedi Path · Survival training · Yoda on Dagobah" },
-      { name: "Breath Control", tagline: "The body as discipline", shipped: false, tiers: [{ name: "Control of Pain", desc: "The practitioner channels physical pain through the Force, separating sensation from suffering." }, { name: "Control of Body", desc: "Hunger, thirst, exhaustion — held at bay through sustained Force focus." }, { name: "Control of Vital Function", desc: "Heart rate, blood flow, respiration — modulated at will." }], source: "The Jedi Path · Foundational Jedi training across all eras" }
-    ]
+  framework: {
+    label: "Pillar I of III — The Three Jedi Pillars: Force · Knowledge · Self-Discipline",
+    name: "The Force",
+    desc: "The first pillar governs Force ability. The practitioner begins inward (Control), extends outward (Sense), then acts upon the world (Alter). Pillars II and III — Knowledge and Self-Discipline — govern lore and conduct; they have no Force-ability expression and are not mapped here."
   },
-  sense: {
-    name: "Sense",
-    tagline: "The Force expanding outward",
+  columns: [
+    {
+      name: "Control", rank: "Initiate Rank", tagline: "The Force focused inward",
+      disciplines: [
+        {
+          name: "Tutaminis", tagline: "The absorbing field", shipped: true,
+          manuscriptUrl: "https://youtu.be/R6TZ1rwnhbc", manuscriptLabel: "Manuscript I",
+          tiers: [
+            { name: "Force Aura", label: "Initiate",
+              desc: "The practitioner shapes a field that absorbs ambient energy — sonic, thermal, electrical. Selective at this tier; raw kinetic strikes pass through." },
+            { name: "Force Shield", label: "Adept",
+              desc: "The field densifies. Coherent kinetic force meets resistance. A lightsaber strikes and is shed. The body beneath is unmarked." },
+            { name: "Force Armor", label: "Master",
+              desc: "The field collapses into the body itself. The Master does not project the field — the Master is the field. The catch is bare-handed." }
+          ],
+          source: "The Jedi Path · KOTOR I: Force Aura / Force Shield / Force Armor · KOTOR II: Energy Resistance · Halcyon Jedi line · Satele Shan at Alderaan"
+        },
+        {
+          name: "Curato Salva", tagline: "The healing flow", shipped: false,
+          tiers: [
+            { name: "Cure", label: "Initiate",
+              desc: "The practitioner channels the Force through their body — or a touched subject's — accelerating cellular repair and flushing toxins. KOTOR I &amp; II: Cure." },
+            { name: "Heal", label: "Adept",
+              desc: "Deeper wounds, more extended channeling. The practitioner holds focus through fatigue, guiding recovery past the body's natural threshold. KOTOR I &amp; II: Heal." },
+            { name: "Master Heal", label: "Master",
+              desc: "The practitioner can pull a body back from the edge of death — at considerable personal cost. KOTOR I &amp; II: Master Heal." }
+          ],
+          source: "The Jedi Path ('a family of abilities that emphasizes the healing of self') · KOTOR I &amp; II: Cure / Heal / Master Heal · Old Republic Jedi healers · Rey on Kef Bir"
+        },
+        {
+          name: "Altus Sopor", tagline: "Deep stillness", shipped: false,
+          tiers: [
+            { name: "Trance", label: "Initiate",
+              desc: "The practitioner slows their metabolism into a Force-sustained meditative state. Daily training discipline across all Jedi ranks." },
+            { name: "Concealment", label: "Adept",
+              desc: "The practitioner merges into the Force until their presence becomes invisible even to those trained to sense it. KOTOR II: Force Camouflage (Jedi Watchman prestige — KOTOR II exclusive)." },
+            { name: "Hibernation Trance", label: "Master",
+              desc: "Survival in conditions that would kill an ordinary body — vacuum, extremes of cold, prolonged starvation. The practitioner sustains life through Force alone." }
+          ],
+          source: "The Jedi Path ('merge into the Force so that you become nearly invisible') · KOTOR II: Force Camouflage · Yoda's thirty years on Dagobah"
+        }
+      ]
+    },
+    {
+      name: "Sense", rank: "Padawan Rank", tagline: "The Force expanding outward",
+      disciplines: [
+        {
+          name: "Prima Vitae", tagline: "The life sense", shipped: false,
+          singular: {
+            desc: "The practitioner perceives living presences around them — their number, positions, vitality, and with mastery, their emotional state and intent. One of the first Sense abilities to emerge in training. The Jedi Path identifies this as 'one of the most basic Sense abilities.' Master practitioners sense life across planetary distances.",
+            scale: "From nearby presences → emotional state and intent → planetary-scale awareness"
+          },
+          source: "The Jedi Path ('You can feel the presence of living things and track their positions at long range') · Obi-Wan on the Death Star · foundational to all Jedi Sense training"
+        },
+        {
+          name: "Magnifying the Senses", tagline: "The Force-amplified perception", shipped: false,
+          singular: {
+            desc: "The practitioner enhances their own physical senses beyond biological limits — 'Force-boosted hearing' or 'improved eyesight that exceeds the range of macrobinoculars,' per the Jedi Path. The Force sharpens what the practitioner can already perceive, rather than extending into new metaphysical territory. Battlefield and tracking applications across all eras.",
+            scale: "From precision detail in a single sense → multi-sense amplification → tracking across terrain and atmosphere"
+          },
+          source: "The Jedi Path (explicit Sense discipline) · KOTOR II: Force Sight (Visas Marr / Miraluka passive ability) · reconnaissance and tracking applications across eras"
+        },
+        {
+          name: "Psychometry", tagline: "The reading of objects", shipped: false,
+          singular: {
+            desc: "The practitioner reads emotional residue and historical echoes held within a touched object. The Jedi Path names this tai vordrax — postcognition drawing on the Unifying Force. Surface impressions come easily; deeper readings of older history require full immersion. The deepest readings let the practitioner walk in the past as witness — at the cost of bearing what the object remembers.",
+            scale: "From recent emotional residue → witnessing scenes from an object's past → walking in the past as if present"
+          },
+          source: "The Jedi Path (tai vordrax — postcognition, Unifying Force) · Quinlan Vos · Cal Kestis (Jedi: Fallen Order) · Obi-Wan on Psychometry: 'Master Tholme's Padawan Quinlan can do this. Amazing.'"
+        },
+        {
+          name: "Projected Telepathy", tagline: "The mind reaching across", shipped: false,
+          singular: {
+            desc: "The practitioner projects thought and receives the same — the Jedi Path classifies this as a Sense+Alter combination. At low mastery, surface thoughts of those nearby. With practice, mind-to-mind communication across familiar distance. At master level, sustained Force-bonds that bridge any distance, the Force itself becoming the channel.",
+            scale: "From local surface thoughts → consensual mind-to-mind contact → Force-bond sustained across any distance"
+          },
+          source: "The Jedi Path (Sense+Alter combination) · KOTOR I: Bastila/Revan Force-bond · Master/Apprentice bond tradition · Rey/Kylo dyad (current canon)"
+        }
+      ]
+    },
+    {
+      name: "Alter", rank: "Knight Rank", tagline: "The Force shaping the world",
+      disciplines: [
+        {
+          name: "Telekinesis", tagline: "The hand that does not touch", shipped: false,
+          tiers: [
+            { name: "Push / Pull", label: "Initiate",
+              desc: "The practitioner moves objects through Force channeled outward — the foundational Alter application. KOTOR I &amp; II: Force Push / Force Pull / Force Wave." },
+            { name: "Throw / Redirect", label: "Adept",
+              desc: "Force-thrown weapons, debris weaponized, lightsaber recall. The practitioner directs momentum rather than generating it. KOTOR I: Force Whirlwind / Force Throw." },
+            { name: "Lift the Massive", label: "Master",
+              desc: "Objects of extraordinary mass yield at master tier. The effort becomes effortless at cost of concentration — Yoda's X-wing on Dagobah. Galen Marek redirects a Star Destroyer." }
+          ],
+          source: "The Jedi Path ('the most fundamental Alter ability') · KOTOR I &amp; II: full Push / Pull / Wave / Whirlwind line · Yoda on Dagobah · Galen Marek · foundational across all eras"
+        },
+        {
+          name: "Affect Mind", tagline: "The persuasion frequency", shipped: false,
+          tiers: [
+            { name: "Suggestion", label: "Initiate",
+              desc: "The practitioner redirects the will of undisciplined minds. Requires a compliant or weakened mental state in the target. KOTOR I: Affect Mind." },
+            { name: "Domination", label: "Adept",
+              desc: "Stronger minds bend under sustained pressure. The practitioner shapes belief, behavior, and recall. KOTOR I: Dominate Mind. Rarer and more taxing than Suggestion." },
+            { name: "Compulsion", label: "Master",
+              desc: "At master tier, the line between persuasion and absolute compulsion becomes a matter of intent — the capability is the same. KOTOR I: Force Confusion. The darkest expressions are the Sith's refinements." }
+          ],
+          source: "The Jedi Path ('override the impulses of an undisciplined brain') · KOTOR I: Affect Mind / Dominate Mind / Force Confusion · Obi-Wan Kenobi · Sith dark variants (Fear / Horror / Insanity) filed under Sith refinement"
+        },
+        {
+          name: "Alter Environment", tagline: "The world bent to will", shipped: false,
+          singular: {
+            desc: "The practitioner shifts environmental conditions through Force focus. The Jedi Path: 'summoning whirlwinds, lightning strikes, or ice storms — evidence of the Force's ability to control the natural world.' At low mastery, small local changes — air movement, flame suppression, temperature shift. With practice, regional conditions. Master expressions reshape the environment at scale, at cost of precision.",
+            scale: "From local conditions → regional weather systems → environmental upheaval at scale"
+          },
+          source: "The Jedi Path (explicit Alter discipline) · Sith expressions pushed to extremes: Force Lightning (KOTOR I &amp; II) / Force Storm · the dark-side refinements are the Sith's most visible expression of this discipline"
+        },
+        {
+          name: "Plant Surge", tagline: "The living world directed", shipped: false,
+          singular: {
+            desc: "Consitor Sato — the practitioner draws on the Living Force to stimulate or redirect plant growth. The Jedi Path names this as the fourth Alter discipline alongside Telekinesis, Affect Mind, and Alter Environment. At base level, accelerated growth of existing vegetation. With mastery, entanglement — the practitioner ensnares enemies in rapidly growing thorned growth. A discipline rarely taught formally; more often expressed through deep Living Force connection.",
+            scale: "From accelerated growth → directional entanglement → large-scale environmental vegetation command"
+          },
+          source: "The Jedi Path (Consitor Sato — explicitly named as fourth Alter discipline) · Living Force practitioners · not present in KOTOR I or II — extended canon only"
+        }
+      ]
+    }
+  ],
+  advanced: {
+    label: "Post-Knight Elective Specialization — not filed under Control, Sense, or Alter",
+    name: "Advanced Techniques",
+    desc: "The Jedi Path is explicit: these require mastery of the primary Force disciplines before specialization begins. A Knight commits 'a year or two' of devoted practice. Not all Knights pursue them. The Council maintains 'verifiable benchmarks' — the Jedi Trials — to judge readiness before Advanced work begins.",
     disciplines: [
-      { name: "Battle Meditation", tagline: "The unified will", shipped: false, manuscriptLabel: "Manuscript II (in production)", singular: { desc: "The practitioner enters deep trance and projects coordinated will across allies — sharpening focus, sustaining confidence, holding off despair. Range and number of beings affected scale with mastery, from a single ally nearby to fleet-scale engagements that shift the tide of entire battles.", scale: "From two minds → a unit → an army" }, source: "Bastila Shan · Nomi Sunrider · KOTOR + Tales of the Jedi" },
-      { name: "Psychometry", tagline: "The reading of objects", shipped: false, singular: { desc: "The practitioner reads emotional residue and historical echoes from a touched object. Surface impressions come easily; deeper readings of an object's older history demand greater immersion. The deepest readings let the practitioner experience past events as if present — at the cost of bearing what the object remembers.", scale: "From recent emotional residue → witnessing the past as if present" }, source: "Quinlan Vos · Cal Kestis (Jedi: Fallen Order, current canon)" },
-      { name: "Prima Vitae", tagline: "The life sense", shipped: false, singular: { desc: "The practitioner perceives the living presence around them — friend, foe, beast, plant. With mastery, emotional state, intent, and deception become as readable as words. Master practitioners sense life across planetary distances.", scale: "From nearby presences → emotional state and intent → planetary-scale awareness" }, source: "The Jedi Path · Sense pillar · Obi-Wan on the Death Star" },
-      { name: "Projected Telepathy", tagline: "The mind reaching across", shipped: false, singular: { desc: "The practitioner projects thought and receives the same. At low mastery, surface thoughts of those nearby. With practice, mind-to-mind communication across familiar distance. At master, sustained Force-bonds across any distance — the Force itself the channel.", scale: "From local surface thoughts → mind-to-mind communication → Force-bond across any distance" }, source: "The Jedi Path · Force-bonds (Bastila/Revan, Master/Apprentice pairs, Rey/Kylo dyad)" }
-    ]
-  },
-  alter: {
-    name: "Alter",
-    tagline: "The Force shaping the world",
-    disciplines: [
-      { name: "Telekinesis", tagline: "The hand that does not touch", shipped: false, tiers: [{ name: "Move", desc: "The practitioner pushes, pulls, or lifts objects through Force channeled outward." }, { name: "Throw", desc: "Force-thrown weapons, debris weaponized, lightsaber recall." }, { name: "Lift the Massive", desc: "At master tier, the practitioner moves objects of considerable mass — sometimes far beyond what physical strength allows." }], source: "Foundational Force discipline · Yoda's X-Wing on Dagobah · Galen Marek lifts a Star Destroyer" },
-      { name: "Affect Mind", tagline: "The persuasion frequency", shipped: false, tiers: [{ name: "Suggestion", desc: "The weak-willed take a small redirection — 'these are not the droids you seek.'" }, { name: "Persuasion", desc: "Stronger minds bend; the practitioner shapes belief, behavior, recall." }, { name: "Compulsion", desc: "At master tier, the line between persuasion and domination becomes one of intent — not capability." }], source: "Jedi mind trick · Obi-Wan Kenobi · Old Republic Jedi" },
-      { name: "Alter Environment", tagline: "The world bent to will", shipped: false, singular: { desc: "The practitioner shifts the environment around them through Force focus. At low mastery, small changes — air, flame, water nearby. With practice, atmospheric conditions over a region. Master expressions reshape the environment at scale, at the cost of precise control.", scale: "From local conditions → regional weather → environmental upheaval" }, source: "The Jedi Path · refined to extremes by Sith counterparts" }
+      {
+        name: "Battle Meditation", tagline: "The unified will", inprod: true,
+        manuscriptLabel: "Manuscript II — In Production",
+        singular: {
+          desc: "The practitioner enters deep trance and projects coordinated will outward — 'touching the minds of every soldier in a combat zone, friend and foe alike.' Allies receive a boost in morale and fighting efficiency; enemies are 'seized by confusion and fear.' The technique scales with mastery from one companion to fleet-level engagement. Critical vulnerability: the practitioner is the single point of failure. At Mizra, the coordinator's death 'turned the Jedi retreat into a full-scale slaughter.' The technique collapses with the practitioner. Anakin Skywalker, in the marginalia: 'I'VE HEARD ABOUT A RECRUITMENT DRIVE FOR BATTLE MEDITATION ADEPTS.' Darth Sidious, same page: 'Mere child's play.'",
+          scale: "From a single companion → unit-scale coordination → army-wide and fleet-scale engagement"
+        },
+        source: "The Jedi Path (Advanced Technique — post-Knight elective, NOT a base Sense discipline) · KOTOR I: Bastila Shan (plot-critical ability, not player-usable) · KOTOR II: playable Force power (Jedi Master / Jedi Watchman prestige) · Nomi Sunrider · Tales of the Jedi"
+      }
     ]
   }
 };
 
+// ─── SITH DATA ────────────────────────────────────────────────────────────────
 const sithData = {
-  control: {
-    name: "Control",
-    tagline: "The Force focused inward — corrupted",
-    disciplines: [
-      { name: "Force Drain", tagline: "Life essence transferred", shipped: false, singular: { desc: "The practitioner pulls life-force from a victim into themselves — the inverse of Curato Salva. The victim weakens; the practitioner strengthens. With mastery, the drain reaches across distance and against multiple targets simultaneously.", scale: "From single touch → ranged drain → mass life-stripping" }, source: "Sith Lords across all eras · Darth Nihilus's hunger as ultimate expression" },
-      { name: "Force Rage", tagline: "The dark surrender", shipped: false, singular: { desc: "The practitioner channels anger, hatred, and pain into amplified physical strength, speed, and Force capacity. Sustained at cost — the body breaks down under prolonged Rage. The practitioner trades long-term wellness for short-term dominance.", scale: "From single combat surge → battle-long sustained fury → permanent state of berserk power" }, source: "Sith warrior tradition · Darth Vader · KOTOR Dark Marauder" },
-      { name: "Dun Möch", tagline: "The taunt that breaks", shipped: false, singular: { desc: "Psychological warfare through targeted mockery — the practitioner identifies their opponent's deepest doubt and presses on it during combat, breaking concentration and inducing emotional opening that exposes them to the dark side.", scale: "From combat taunt → sustained psychological campaign → conversion through despair" }, source: "Book of Sith · Sith dueling tradition" }
-    ]
+  framework: {
+    label: "Sith Taxonomy — The Dark Side Filing",
+    name: "The Dark Side",
+    desc: "The Sith do not accept the Jedi's framework. The Force, to the Sith, is not a discipline to be mastered — it is a predatory resource to be claimed. Two competing Sith taxonomies exist in the record: Darth Bane organized by application (Offense, Body, Mind). Darth Plagueis organized by metaphysical nature (Aperion: essence and creation — Anima: life-force and vitality — Pneuma: consciousness and will). The Archivist cross-references both."
   },
-  sense: {
-    name: "Sense",
-    tagline: "The Force expanding outward — corrupted",
+  taxonomyNote: "Neither Sith system maps cleanly onto the Jedi's Control / Sense / Alter. The techniques are the same Force. The relationship to it is not.",
+  columns: [
+    {
+      name: "Offense", tagline: "Bane — Force as weapon",
+      crossref: "Plagueis cross-ref: Aperion (destruction of essence) · Pneuma (overwhelming consciousness)",
+      disciplines: [
+        {
+          name: "Force Lightning", tagline: "Bioelectric annihilation", shipped: false,
+          tiers: [
+            { name: "Shock", label: "Initiate",
+              desc: "Bright crackling current arcs from the practitioner's hands — painful, momentarily disabling. KOTOR I: Shock (first tier of the progression)." },
+            { name: "Force Lightning", label: "Adept",
+              desc: "Sustained branching current capable of incapacitating or killing through prolonged exposure. The signature Sith weapon. KOTOR I: Force Lightning." },
+            { name: "Force Storm", label: "Master",
+              desc: "A reality-distorting storm of pure dark-side energy beyond atmospheric lightning — the master expression. KOTOR I: Force Storm. Darth Sidious's preferred instrument of mass destruction." }
+          ],
+          source: "Sith tradition from the Hundred-Year Darkness · KOTOR I: Shock / Force Lightning / Force Storm (full verified progression) · Darth Bane · Darth Sidious"
+        },
+        {
+          name: "Force Choke", tagline: "Telekinesis applied to a throat", shipped: false,
+          tiers: [
+            { name: "Force Wound", label: "Initiate",
+              desc: "The practitioner applies telekinetic pressure to a living target's body — rupturing tissue, constricting airways. KOTOR I: Force Wound." },
+            { name: "Force Choke", label: "Adept",
+              desc: "Targeted restriction of blood flow and respiration. Applied at range. Held with sufficient precision to torture without immediate death. KOTOR I: Force Choke." },
+            { name: "Force Kill", label: "Master",
+              desc: "The master expression — direct application to the cardiovascular system. No contact required. Multiple targets simultaneously. KOTOR I: Force Kill." }
+          ],
+          source: "KOTOR I: Force Wound / Force Choke / Force Kill (full verified progression) · Darth Vader (The Empire Strikes Back, at table range) · Sith dueling tradition"
+        }
+      ]
+    },
+    {
+      name: "Body", tagline: "Bane — the Sith as instrument",
+      crossref: "Plagueis cross-ref: Anima (life-force manipulation and consumption)",
+      disciplines: [
+        {
+          name: "Force Drain", tagline: "Life essence transferred", shipped: false,
+          tiers: [
+            { name: "Drain Life", label: "Initiate",
+              desc: "The practitioner pulls life-force from a single victim. The victim weakens; the practitioner strengthens. The inverse of Curato Salva applied outward. KOTOR I: Drain Life." },
+            { name: "Death Field", label: "Adept",
+              desc: "The drain extends as an area effect — all living beings within range stripped simultaneously. KOTOR I: Death Field." },
+            { name: "Total Consumption", label: "Master",
+              desc: "The master expression does not drain to sustain — it drains until nothing remains. Darth Nihilus as the ultimate expression of this discipline: a wound in the Force that consumed planets." }
+          ],
+          source: "KOTOR I: Drain Life / Death Field (verified) · Darth Nihilus — the discipline reaching its logical endpoint · the dark inversion of Curato Salva"
+        },
+        {
+          name: "Force Rage", tagline: "The dark surrender", shipped: false,
+          singular: {
+            desc: "The practitioner channels anger, hatred, and pain into amplified physical strength, speed, and Force capacity. The body becomes both weapon and fuel. Sustained Rage degrades the practitioner's own constitution — the Sith trades long-term wellness for short-term dominance. KOTOR II includes Force Rage as a playable power.",
+            scale: "From a single combat surge → sustained battle fury → permanent state at devastating physical cost"
+          },
+          source: "Sith warrior tradition · KOTOR II: Force Rage (playable) · Darth Vader's combat approach · Dark Marauder prestige class discipline"
+        },
+        {
+          name: "Dun Möch", tagline: "The taunt that unmakes", shipped: false,
+          singular: {
+            desc: "Psychological warfare through targeted contempt — the practitioner identifies the opponent's deepest doubt and presses on it during combat, breaking concentration and inducing emotional openings that expose the target to dark-side suggestion. Dun Möch operates through shame, not the Force directly; it is the predatory use of the practitioner's awareness of the target's interior. The Book of Sith names it explicitly.",
+            scale: "From combat distraction → sustained psychological campaign → conversion through despair"
+          },
+          source: "Book of Sith (explicit technique) · Sith dueling tradition · Darth Vader against Luke Skywalker (Return of the Jedi) — 'your feelings for them are strong'"
+        }
+      ]
+    },
+    {
+      name: "Mind", tagline: "Bane — the dominated will",
+      crossref: "Plagueis cross-ref: Pneuma (consciousness override) · Anima (will and identity consumption)",
+      disciplines: [
+        {
+          name: "Fear / Horror / Insanity", tagline: "Terror conducted through the Force", shipped: false,
+          tiers: [
+            { name: "Force Fear", label: "Initiate",
+              desc: "The practitioner projects overwhelming fear into a target's mind. The weak-willed flee or freeze. The dark-side inversion of Affect Mind. KOTOR I: Force Fear." },
+            { name: "Force Horror", label: "Adept",
+              desc: "The target experiences not mere fear but horror — paralysis through Force-amplified certainty of their own doom. KOTOR I: Force Horror." },
+            { name: "Force Insanity", label: "Master",
+              desc: "The target's mind breaks under sustained dark-side pressure — disoriented, incapacitated, turned against allies. The master expression of the Sith's refinement of Affect Mind. KOTOR I: Force Insanity." }
+          ],
+          source: "KOTOR I: Force Fear / Force Horror / Force Insanity (full dark-side progression, verified) · Sith psychological warfare doctrine · Book of Sith: fear as statecraft at scale"
+        },
+        {
+          name: "Mind Probe", tagline: "The thought taken", shipped: false,
+          tiers: [
+            { name: "Surface Read", label: "Initiate",
+              desc: "The practitioner extracts surface thoughts from a captive subject without consent — the inverse of consensual Projected Telepathy." },
+            { name: "Deep Probe", label: "Adept",
+              desc: "Buried memories and suppressed knowledge pulled to the surface. The process frequently leaves the subject with neurological damage." },
+            { name: "Total Extraction", label: "Master",
+              desc: "Master practitioners strip every accessible memory from a subject, leaving a functional shell. Classified as torture and prohibited under every Code the Archivist has read." }
+          ],
+          source: "Sith interrogation tradition · Darth Vader on Bespin · Kylo Ren on Starkiller Base · the dark completion of Projected Telepathy"
+        },
+        {
+          name: "Qâzoi Kyantuska", tagline: "The suppressed will", shipped: false,
+          singular: {
+            desc: "The Sith technique of overriding another's free will through sustained dark-side Force domination — beyond the Jedi's Dominate Mind in its completeness. The practitioner does not suggest; they commandeer. The target acts against their own will with full interior awareness of what they are doing. The Book of Sith names this explicitly as a distinct Sith discipline, not merely an amplified version of the Jedi's Affect Mind.",
+            scale: "Single target — total will override sustained for the duration of the practitioner's concentration"
+          },
+          source: "Book of Sith (named explicitly) · Sith domination tradition · the dark completion and inversion of Projected Telepathy and Affect Mind both"
+        }
+      ]
+    }
+  ],
+  advanced: {
+    label: "The Asymmetry — what the Sith never systematized",
+    name: "Collective Force Manipulation",
+    desc: "The Jedi built Battle Meditation into a teachable, progressive, named discipline. The Sith never did. What exists instead: the Thought Bomb (Bane's account — self-consuming Force destruction, practitioners included), fear-statecraft (Sidious using political terror as Force-adjacent collective suppression), and Mesmerism (Nightsister variant — Talzin). The Archivist notes the asymmetry: the Sith are predators. They built no technique for uplifting others — only for consuming them.",
     disciplines: [
-      { name: "Mind Probe", tagline: "The thought taken", shipped: false, tiers: [{ name: "Surface Read", desc: "The practitioner extracts surface thoughts from a captive subject without consent — the inverse of consensual telepathy." }, { name: "Deep Probe", desc: "Buried memories and suppressed knowledge are pulled to the surface, often leaving the subject neurologically damaged." }, { name: "Total Extraction", desc: "Master practitioners strip every memory from a subject, leaving an empty shell behind. The technique is illegal in every order that has ever known of it." }], source: "Sith interrogation tradition · Darth Vader on Bespin · Kylo Ren on Starkiller Base" },
-      { name: "Sith Battle Coordination", tagline: "The despair conducted", shipped: false, singular: { desc: "The same architecture as Battle Meditation, applied with inverted intent — instead of unifying allies, the Sith practitioner *breaks enemy will*, projecting despair, confusion, and dread across opposing forces. Lord Hoth used it. Bastila Shan, briefly converted, demonstrated its battlefield reversibility.", scale: "From single-unit demoralization → army-scale despair → fleet-scale collapse" }, source: "Lord Hoth · Bastila Shan post-conversion · Darth Caedus (Jacen Solo)" },
-      { name: "Aura of Uneasiness", tagline: "Fear projected outward", shipped: false, singular: { desc: "The practitioner radiates a Force-projected aura of dread, unease, or revulsion that affects all sentients within range. The weak-willed flee; the strong-willed feel deeply uncomfortable. The aura sustains as long as the practitioner concentrates.", scale: "From immediate vicinity → entire chambers → city-scale dread campaigns" }, source: "Sith Lord intimidation · Sith fortress wards" }
-    ]
-  },
-  alter: {
-    name: "Alter",
-    tagline: "The Force shaping the world — corrupted",
-    disciplines: [
-      { name: "Force Lightning", tagline: "Bioelectric annihilation", shipped: false, tiers: [{ name: "Force Sparks", desc: "Bright crackling current arcs from the practitioner's hands — painful, momentarily disabling, but recoverable." }, { name: "Force Lightning", desc: "Sustained branching current capable of incapacitating or killing through prolonged exposure. The signature Sith weapon." }, { name: "Force Crucitorn", desc: "At master tier, the lightning is shaped through Force focus to inflict only pain without lethal damage — torment as discipline. Or alternately, lethality at fleet-scale." }], source: "Darth Sidious · Darth Bane · Sith tradition since the Hundred-Year Darkness" },
-      { name: "Force Choke", tagline: "Telekinesis weaponized", shipped: false, singular: { desc: "The practitioner applies telekinesis to a living target's throat, restricting blood flow and respiration. With mastery, the choke can be applied at distance, through walls, or to multiple targets simultaneously — and held with sufficient precision to torture without immediate death.", scale: "From single point-blank touch → ranged hold → multi-target sustained pressure" }, source: "Darth Vader · Sith dueling tradition" },
-      { name: "Force Storm", tagline: "The weather of the Sith", shipped: false, singular: { desc: "Master-tier expression — the practitioner conjures a localized atmospheric or extra-dimensional storm of pure dark-side energy. Force tornadoes, lightning storms, and reality-distorting voids fall under this discipline. Few practitioners survive their own first attempt.", scale: "Master-tier only — the discipline has no Initiate or Adept stage by canon" }, source: "Darth Sidious · Dark Lord of the Sith ritual peak expressions" }
+      {
+        name: "Thought Bomb", tagline: "The Sith last resort", shipped: false,
+        singular: {
+          desc: "A collective Sith ritual — multiple practitioners contribute their dark-side Force energy to detonate it as a concentrated explosion that destroys all Force-sensitives within range, practitioners included. Not a battle technique. A final act when defeat is certain. Lord Kaan used it at Ruusan. The souls of those destroyed are not released — they are trapped, suspended in a Force-nexus of anguish, conscious and immobile. The Archivist notes: the Thought Bomb is the Sith answering Battle Meditation. It is mutual annihilation dressed as victory.",
+          scale: "No scaling — a Thought Bomb is a singular act of total destruction, not a progressive discipline"
+        },
+        source: "Book of Sith — Darth Bane's own account · Battle of Ruusan · Lord Kaan · the antithesis of Battle Meditation — collective Force used for mutual destruction rather than uplift"
+      }
     ]
   }
 };
 
-const root = document.getElementById('pillars');
+// ─── RENDER HELPERS ───────────────────────────────────────────────────────────
+function buildDisciplineEl(d) {
+  const el = document.createElement('div');
+  let cardCls = 'discipline', statusCls, statusTxt;
+  if (d.shipped) {
+    cardCls += ' shipped'; statusCls = 'status-shipped'; statusTxt = 'Available';
+  } else if (d.inprod) {
+    cardCls += ' inprod'; statusCls = 'status-inprod'; statusTxt = 'In Production';
+  } else {
+    statusCls = 'status-planned'; statusTxt = 'Planned';
+  }
+  el.className = cardCls;
+
+  let detail = '';
+  if (d.tiers) {
+    d.tiers.forEach((t, i) => {
+      const roman = ['I','II','III'][i];
+      const lbl = t.label || ['Initiate','Adept','Master'][i];
+      detail += `<div class="tier"><div class="tier-label">${roman} — ${lbl}</div><div class="tier-name">${t.name}</div><div class="tier-desc">${t.desc}</div></div>`;
+    });
+  } else if (d.singular) {
+    detail = `<div class="singular-expression"><div class="singular-label">Singular Technique — Scales with Mastery</div><div class="singular-desc">${d.singular.desc}</div>${d.singular.scale ? `<div class="scale-note">${d.singular.scale}</div>` : ''}</div>`;
+  }
+
+  let extra = '';
+  if (d.shipped && d.manuscriptUrl) {
+    extra = `<a href="${d.manuscriptUrl}" class="manuscript-link" target="_blank" rel="noopener">Read ${d.manuscriptLabel}</a>`;
+  } else if (d.inprod && d.manuscriptLabel) {
+    extra = `<div class="inprod-label">${d.manuscriptLabel}</div>`;
+  }
+
+  el.innerHTML = `
+    <div class="discipline-header">
+      <div><div class="discipline-name">${d.name}</div><div class="discipline-tagline">${d.tagline}</div></div>
+      <span class="discipline-status ${statusCls}">${statusTxt}</span>
+    </div>
+    <div class="discipline-detail">${detail}<div class="discipline-source">${d.source || ''}</div>${extra}</div>`;
+  el.addEventListener('click', () => el.classList.toggle('expanded'));
+  return el;
+}
+
+function buildFramework(h) {
+  const el = document.createElement('div');
+  el.className = 'framework-header';
+  el.innerHTML = `<div class="fw-label">${h.label}</div><div class="fw-name">${h.name}</div><div class="fw-desc">${h.desc}</div>`;
+  return el;
+}
+
+function buildAdvanced(adv) {
+  const wrap = document.createElement('div');
+  wrap.className = 'advanced-section';
+  const hdr = document.createElement('div');
+  hdr.className = 'framework-header';
+  hdr.innerHTML = `<div class="fw-label">${adv.label}</div><div class="fw-name">${adv.name}</div><div class="fw-desc">${adv.desc}</div>`;
+  wrap.appendChild(hdr);
+  const grid = document.createElement('div');
+  grid.className = 'advanced-grid';
+  adv.disciplines.forEach(d => grid.appendChild(buildDisciplineEl(d)));
+  wrap.appendChild(grid);
+  return wrap;
+}
+
+// ─── RENDER ───────────────────────────────────────────────────────────────────
+const root = document.getElementById('root');
 const tagline = document.getElementById('mode-tagline');
 const subtitle = document.getElementById('mode-subtitle');
 const attribution = document.getElementById('mode-attribution');
-const footer = document.getElementById('mode-footer');
+const modeFooter = document.getElementById('mode-footer');
 
 function render(mode) {
   document.body.className = 'mode-' + mode;
+  root.innerHTML = '';
+
   if (mode === 'jedi') {
     tagline.textContent = 'Light · The Jedi Way';
-    subtitle.innerHTML = 'Force disciplines, examined as objects of study. Each discipline files under one of three Force branches — Control, Sense, Alter — the disciplines of the first Jedi pillar.';
+    subtitle.innerHTML = 'Force abilities catalogued as objects of study — using the Jedi\'s own organizing framework. Control, Sense, and Alter: three disciplines within the first Jedi pillar. Advanced techniques filed separately, above rank.';
     attribution.innerHTML = 'Source: <em>The Jedi Path</em> (Wallace, 2010) · KOTOR I &amp; II canon · all-Star-Wars where the discipline reaches';
-    footer.innerHTML = 'The Archivist examines what the Jedi taught and the Sith refined — outside time, outside the orders.';
+    modeFooter.innerHTML = 'The Archivist examines what the Jedi taught and the Sith refined — outside time, outside the orders.';
+
+    root.appendChild(buildFramework(jediData.framework));
+
+    const pillars = document.createElement('div');
+    pillars.className = 'pillars';
+    jediData.columns.forEach(col => {
+      const p = document.createElement('div');
+      p.className = 'pillar';
+      p.innerHTML = `<div class="pillar-header"><div class="pillar-name">${col.name}</div><div class="pillar-rank">${col.rank}</div><div class="pillar-tagline">${col.tagline}</div></div><div class="discs"></div>`;
+      col.disciplines.forEach(d => p.querySelector('.discs').appendChild(buildDisciplineEl(d)));
+      pillars.appendChild(p);
+    });
+    root.appendChild(pillars);
+
+    const div = document.createElement('div'); div.className = 'divider';
+    root.appendChild(div);
+    root.appendChild(buildAdvanced(jediData.advanced));
+
   } else {
     tagline.textContent = 'Dark · The Sith Refinement';
-    subtitle.innerHTML = 'Sith disciplines — the corrupted vectors of the same Force branches. Control, Sense, Alter — the Sith refined what the Jedi codified. The Archivist files them with the same hand.';
-    attribution.innerHTML = 'Source: <em>Book of Sith</em> (Wallace, 2012) · Old Republic and pre-Republic Sith canon · all-Star-Wars where the corruption reaches';
-    footer.innerHTML = 'The Archivist files the Sith refinements with the same hand that filed the Jedi teachings.';
-  }
-  const data = mode === 'jedi' ? jediData : sithData;
-  root.innerHTML = '';
-  Object.keys(data).forEach(key => {
-    const pillar = data[key];
-    const pillarEl = document.createElement('div');
-    pillarEl.className = 'pillar';
-    pillarEl.innerHTML = `<div class="pillar-header"><div class="pillar-name">${pillar.name}</div><div class="pillar-tagline">${pillar.tagline}</div></div><div class="disciplines"></div>`;
-    const discRoot = pillarEl.querySelector('.disciplines');
-    pillar.disciplines.forEach(d => {
-      const dEl = document.createElement('div');
-      dEl.className = 'discipline' + (d.shipped ? ' shipped' : '');
-      const statusClass = d.shipped ? 'status-shipped' : 'status-planned';
-      const statusText = d.shipped ? 'Available' : 'Planned';
-      let detailContent = '';
-      if (d.tiers) {
-        d.tiers.forEach((t, i) => {
-          const roman = ['I', 'II', 'III'][i];
-          const tierLabel = ['Initiate', 'Adept', 'Master'][i];
-          detailContent += `<div class="tier"><div class="tier-label">${roman} — ${tierLabel}</div><div class="tier-name">${t.name}</div><div class="tier-desc">${t.desc}</div></div>`;
-        });
-      } else if (d.singular) {
-        detailContent = `<div class="singular-expression"><div class="singular-label">Singular Technique — Scales with Mastery</div><div class="singular-desc">${d.singular.desc}</div>${d.singular.scale ? `<div class="scale-note">${d.singular.scale}</div>` : ''}</div>`;
-      }
-      let linkHtml = '';
-      if (d.shipped && d.manuscriptUrl) {
-        linkHtml = `<a href="${d.manuscriptUrl}" class="manuscript-link" target="_blank" rel="noopener">Read ${d.manuscriptLabel}</a>`;
-      }
-      dEl.innerHTML = `<div class="discipline-header"><div><div class="discipline-name">${d.name}</div><div class="discipline-tagline">${d.tagline}</div></div><span class="discipline-status ${statusClass}">${statusText}</span></div><div class="discipline-detail">${detailContent}<div class="discipline-source">${d.source}</div>${linkHtml}</div>`;
-      dEl.addEventListener('click', () => dEl.classList.toggle('expanded'));
-      discRoot.appendChild(dEl);
+    subtitle.innerHTML = 'Sith Force techniques — filed by the Sith\'s own taxonomy, not the Jedi\'s. Bane organized by application: Offense, Body, Mind. Plagueis organized by metaphysical nature: Aperion, Anima, Pneuma. The Archivist cross-references both.';
+    attribution.innerHTML = 'Source: <em>Book of Sith</em> (Wallace, 2012) · KOTOR I &amp; II Sith powers · Old Republic and pre-Republic Sith tradition';
+    modeFooter.innerHTML = 'The Archivist files the Sith refinements with the same hand that filed the Jedi teachings.';
+
+    root.appendChild(buildFramework(sithData.framework));
+
+    const note = document.createElement('div');
+    note.className = 'framework-header';
+    note.style.cssText = 'font-style:italic;font-size:0.84rem;color:var(--text-tertiary);line-height:1.8;margin-bottom:32px;';
+    note.textContent = sithData.taxonomyNote;
+    root.appendChild(note);
+
+    const pillars = document.createElement('div');
+    pillars.className = 'pillars';
+    sithData.columns.forEach(col => {
+      const p = document.createElement('div');
+      p.className = 'pillar';
+      p.innerHTML = `<div class="pillar-header"><div class="pillar-name">${col.name}</div><div class="pillar-tagline">${col.tagline}</div><div class="pillar-crossref">${col.crossref}</div></div><div class="discs"></div>`;
+      col.disciplines.forEach(d => p.querySelector('.discs').appendChild(buildDisciplineEl(d)));
+      pillars.appendChild(p);
     });
-    root.appendChild(pillarEl);
-  });
+    root.appendChild(pillars);
+
+    const div = document.createElement('div'); div.className = 'divider';
+    root.appendChild(div);
+    root.appendChild(buildAdvanced(sithData.advanced));
+  }
 }
 
-document.querySelectorAll('.mask-half').forEach(half => {
-  half.addEventListener('click', (e) => {
+document.querySelectorAll('.mask-half').forEach(h => {
+  h.addEventListener('click', e => {
     e.stopPropagation();
-    const mode = half.dataset.mode;
+    const mode = h.dataset.mode;
     localStorage.setItem('manuscripts-mode', mode);
     render(mode);
   });
 });
 
-const savedMode = localStorage.getItem('manuscripts-mode') || 'jedi';
-render(savedMode);
+render(localStorage.getItem('manuscripts-mode') || 'jedi');
 </script>
 </body>
 </html>
