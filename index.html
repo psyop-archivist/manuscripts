@@ -372,21 +372,9 @@ const sithData = {
   taxonomyNote: "Neither Sith system maps cleanly onto the Jedi's Control / Sense / Alter. The techniques are the same Force. The relationship to it is not.",
   columns: [
     {
-      name: "Offense", tagline: "Bane — Force as weapon",
-      crossref: "Plagueis cross-ref: Aperion (destruction of essence) · Pneuma (overwhelming consciousness)",
+      name: "Offense", tagline: "Bane — combat-immediate Force skills",
+      crossref: "Plagueis cross-ref: Aperion (matter, space, kinetic force)",
       disciplines: [
-        {
-          name: "Force Lightning", tagline: "Bioelectric annihilation", shipped: false,
-          tiers: [
-            { name: "Shock", label: "Initiate",
-              desc: "Bright crackling current arcs from the practitioner's hands — painful, momentarily disabling. KOTOR I: Shock (first tier of the progression)." },
-            { name: "Force Lightning", label: "Adept",
-              desc: "Sustained branching current capable of incapacitating or killing through prolonged exposure. The signature Sith weapon. KOTOR I: Force Lightning." },
-            { name: "Force Storm", label: "Master",
-              desc: "A reality-distorting storm of pure dark-side energy beyond atmospheric lightning — the master expression. KOTOR I: Force Storm. Darth Sidious's preferred instrument of mass destruction." }
-          ],
-          source: "Sith tradition from the Hundred-Year Darkness · KOTOR I: Shock / Force Lightning / Force Storm (full verified progression) · Darth Bane · Darth Sidious"
-        },
         {
           name: "Force Choke", tagline: "Telekinesis applied to a throat", shipped: false,
           tiers: [
@@ -402,9 +390,21 @@ const sithData = {
       ]
     },
     {
-      name: "Body", tagline: "Bane — the Sith as instrument",
+      name: "Body", tagline: "Bane — Force drawn from the living Force, acting on bodies and life-force",
       crossref: "Plagueis cross-ref: Anima (life-force manipulation and consumption)",
       disciplines: [
+        {
+          name: "Force Lightning", tagline: "Bioelectric annihilation", shipped: false,
+          tiers: [
+            { name: "Shock", label: "Initiate",
+              desc: "Bright crackling current arcs from the practitioner's hands — painful, momentarily disabling. KOTOR I: Shock (first tier of the progression)." },
+            { name: "Force Lightning", label: "Adept",
+              desc: "Sustained branching current capable of incapacitating or killing through prolonged exposure. The signature Sith weapon. KOTOR I: Force Lightning." },
+            { name: "Force Storm", label: "Master",
+              desc: "A reality-distorting storm of pure dark-side energy beyond atmospheric lightning — the master expression. KOTOR I: Force Storm. Darth Sidious's preferred instrument of mass destruction." }
+          ],
+          source: "Book of Sith (Bane chapter — Body school) · Sith tradition from the Hundred-Year Darkness · KOTOR I: Shock / Force Lightning / Force Storm (full verified progression) · Darth Bane · Darth Sidious"
+        },
         {
           name: "Force Drain", tagline: "Life essence transferred", shipped: false,
           tiers: [
@@ -420,24 +420,16 @@ const sithData = {
         {
           name: "Force Rage", tagline: "The dark surrender", shipped: false,
           singular: {
-            desc: "The practitioner channels anger, hatred, and pain into amplified physical strength, speed, and Force capacity. The body becomes both weapon and fuel. Sustained Rage degrades the practitioner's own constitution — the Sith trades long-term wellness for short-term dominance. KOTOR II includes Force Rage as a playable power.",
+            desc: "The practitioner channels anger, hatred, and pain into amplified physical strength, speed, and Force capacity. The body becomes both weapon and fuel. Sustained Rage degrades the practitioner's own constitution — the Sith trades long-term wellness for short-term dominance. KOTOR II includes Force Rage as a playable power. (Not in Bane's three named schools; the Archivist files it under Body for its physical self-amplification character.)",
             scale: "From a single combat surge → sustained battle fury → permanent state at devastating physical cost"
           },
           source: "Sith warrior tradition · KOTOR II: Force Rage (playable) · Darth Vader's combat approach · Dark Marauder prestige class discipline"
-        },
-        {
-          name: "Dun Möch", tagline: "The taunt that unmakes", shipped: false,
-          singular: {
-            desc: "Psychological warfare through targeted contempt — the practitioner identifies the opponent's deepest doubt and presses on it during combat, breaking concentration and inducing emotional openings that expose the target to dark-side suggestion. Dun Möch operates through shame, not the Force directly; it is the predatory use of the practitioner's awareness of the target's interior. The Book of Sith names it explicitly.",
-            scale: "From combat distraction → sustained psychological campaign → conversion through despair"
-          },
-          source: "Book of Sith (explicit technique) · Sith dueling tradition · Darth Vader against Luke Skywalker (Return of the Jedi) — 'your feelings for them are strong'"
         }
       ]
     },
     {
-      name: "Mind", tagline: "Bane — the dominated will",
-      crossref: "Plagueis cross-ref: Pneuma (consciousness override) · Anima (will and identity consumption)",
+      name: "Mind", tagline: "Bane — Force drawn from the unifying Force — thought and memory",
+      crossref: "Plagueis cross-ref: Pneuma (consciousness and self-awareness)",
       disciplines: [
         {
           name: "Fear / Horror / Insanity", tagline: "Terror conducted through the Force", shipped: false,
@@ -470,6 +462,14 @@ const sithData = {
             scale: "Single target — total will override sustained for the duration of the practitioner's concentration"
           },
           source: "Book of Sith (named explicitly) · Sith domination tradition · the dark completion and inversion of Projected Telepathy and Affect Mind both"
+        },
+        {
+          name: "Dun Möch", tagline: "The taunt that unmakes", shipped: false,
+          singular: {
+            desc: "Psychological warfare through targeted contempt — the practitioner identifies the opponent's deepest doubt and presses on it during combat, breaking concentration and inducing emotional openings that expose the target to dark-side suggestion. Dun Möch operates through shame, not the Force directly; it is the predatory use of the practitioner's awareness of the target's interior. The Book of Sith names it explicitly as the verbal enabler that strengthens Mind Shard and Memory Walk.",
+            scale: "From combat distraction → sustained psychological campaign → conversion through despair"
+          },
+          source: "Book of Sith (Bane chapter — Mind school, cited as the verbal taunt that improves Mind Shard) · Sith dueling tradition · Darth Vader against Luke Skywalker (Return of the Jedi)"
         }
       ]
     }
